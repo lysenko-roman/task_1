@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Конвертер величин</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<style>
+    body {
+        margin-top: 10px;
+        background: #333;
+        color: #fff;
+    }
+
+    .card-block {
+        padding: 10px;
+    }
+
+    button {
+        margin-bottom: 8px;
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="display-3 text-center mb-3">
+                    Конвертер величин
+                </h1>
+                <form>
+                    <div class="form-group">
+                        <input  id="mInput" placeholder="Введите метры..."
+                        class="form-control form-control-lg">
+                    </div>
+                </form>
+                <div id="output">
+
+                    <div class="card alert-success mb-2">
+                        <div class="card-block">
+                            <h4>Сантиметры:</h4>
+                            <div id="smOutput"></div>
+                        </div>
+                    </div>
+                    <div class="card alert-primary mb-2">
+                        <div class="card-block">
+                            <h4>Дюймы:</h4>
+                            <div id="dmOutput"></div>
+                        </div>
+                    </div>
+                    <div class="card alert-success mb-2">
+                        <div class="card-block">
+                            <h4>Футы:</h4>
+                            <div id="ftOutput"></div>
+                        </div>
+                    </div>
+
+                    <button id="btnId">Дополнительные единицы измерения</button>
+
+                    <div id="more">
+                        <div class="card alert-success mb-2">
+                            <div class="card-block">
+                                <h4>Милиметры:</h4>
+                                <div id="mmOutput"></div>
+                            </div>
+                        </div>
+
+                        <div class="card alert-success mb-2">
+                            <div class="card-block">
+                                <h4>Ярды:</h4>
+                                <div id="ydOutput"></div>
+                            </div>
+                        </div>
+
+                        <div class="card alert-success mb-2">
+                            <div class="card-block">
+                                <h4>Километры:</h4>
+                                <div id="kmOutput"></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.querySelector('#output').style.visibility = 'hidden';
+        document.querySelector('#more').style.visibility = 'hidden';
+        document.querySelector('#mInput').addEventListener('input', function (e) {
+            document.querySelector('#output').style.visibility = 'visible';
+            const meter = e.target.value;
+
+            const obj = {
+                distance: {
+                    value: meter,
+                    unit: 'm',
+                },
+                convert_to: {
+
+                    sm: this.value * 100,
+                    dm: this.value * 39.3701,
+                    ft: this.value  * 3.28084,
+                    mm: this.value  * 1000,
+                    yd: this.value  * 1.09361,
+                    km: this.value  * 0.001,
+                    }
+            }
+            console.log(obj);
+
+
+            const str = JSON.stringify(obj);
+
+            // console.log(str);
+
+            const convert_to = JSON.parse(str);
+            console.log(convert_to);
+
+
+                document.querySelector('#smOutput').innerHTML = obj.convert_to.sm;
+                document.querySelector('#dmOutput').innerHTML = obj.convert_to.dm;
+                document.querySelector('#ftOutput').innerHTML = obj.convert_to.ft;
+
+        const btn = document.querySelector("#btnId");
+
+         btn.onclick = function () {
+
+             document.querySelector('#more').style.visibility = 'visible';
+
+                document.querySelector('#mmOutput').innerHTML = obj.convert_to.mm;
+                document.querySelector('#ydOutput').innerHTML = obj.convert_to.yd;
+                document.querySelector('#kmOutput').innerHTML = obj.convert_to.km;
+    }
+
+
+        })
+
+
+    </script>
+</body>
+</html>
